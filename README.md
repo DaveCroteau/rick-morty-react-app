@@ -21,4 +21,4 @@ npm run build
 
 ## live demo
 
-[Rick and Morty React app](https://)
+[Rick and Morty React app](https://rick-and-morty-react-app.netlify.app/)
