@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const Pages = ({ data, page, getPage }) => {
 	const max = data?.info?.pages || 1
 
-	const onChange = (p) => {
-		getPage(p)
+	const [pageReq, setPageReq] = useState(page)
+
+	const onChange = p => {
+		setPageReq(p)
 	}
 
-	const onClick = (p) => {
+	const onBlur = pageReq => {
+		getPage(pageReq)
+	}
+
+	const onClick = p => {
 		getPage(p)
 	}
 
@@ -19,8 +25,9 @@ const Pages = ({ data, page, getPage }) => {
 			<input
 				type="number"
 				className="current-page"
-				value={page}
-				onChange={(e) => onChange(Number(e.target.value) > 0 ? Number(e.target.value) : 1)}
+				value={pageReq}
+				onChange={e => onChange(e.target.value)}
+				onBlur={e => onBlur(Number(pageReq) > 0 ? Number(pageReq) : 1)}
 			/>
 			<button className="btn" onClick={() => onClick(page + 1 > max ? max : page + 1)}>
 				next
